@@ -15,9 +15,8 @@ export class NegociacaoController {
     adiciona() {
         const negociacao = this.criaNegociacao();
         this.negociacoes.adiciona(negociacao);
-        this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update("Negociação adiconada com sucesso!");
         this.limparFormulario();
+        this.atualizaView();
     }
     criaNegociacao() {
         const regex = /-/g;
@@ -31,5 +30,9 @@ export class NegociacaoController {
         this.inputQuantidade.value = "";
         this.inputValor.value = "";
         this.inputData.focus();
+    }
+    atualizaView() {
+        this.negociacoesView.update(this.negociacoes);
+        this.mensagemView.update("Negociação adiconada com sucesso!");
     }
 }
