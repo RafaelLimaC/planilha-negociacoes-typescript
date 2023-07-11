@@ -1,3 +1,4 @@
+import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -23,7 +24,7 @@ export class NegociacaoController {
         this.atualizaView();
     }
     seForDiaUtil(data) {
-        return data.getDay() > 0 && data.getDay() < 6;
+        return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
         // Get day verifica o dia da semana, de 0 a 6 
         // 0 é domingo, 6 é sabado
     }
