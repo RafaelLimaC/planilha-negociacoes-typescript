@@ -58,9 +58,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #fff;
   text-align: left;
-  background-color: #fff;
+  background-color: #212529;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -1661,7 +1661,7 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529;
+  color: #fff;
 }
 
 .table th,
@@ -1711,8 +1711,8 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
-  background-color: rgba(0, 0, 0, 0.075);
+  color: #5bff76;
+  background-color: rgba(0, 0, 0, 0.95);
 }
 
 .table-primary,
