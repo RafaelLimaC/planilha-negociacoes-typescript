@@ -14,11 +14,12 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     adiciona() {
-        const negociacao = this.criaNegociacao();
+        const negociacao = Negociacao.criaDe(this.inputData.value, this.inputQuantidade.value, this.inputValor.value);
         if (!this.seForDiaUtil(negociacao.data)) {
             this.mensagemView.update("Apenas negociações em dias úteis podem ser inseridas.");
             return;
         }
+        ;
         this.negociacoes.adiciona(negociacao);
         this.limparFormulario();
         this.atualizaView();
@@ -27,13 +28,6 @@ export class NegociacaoController {
         return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
         // Get day verifica o dia da semana, de 0 a 6 
         // 0 é domingo, 6 é sabado
-    }
-    criaNegociacao() {
-        const regex = /-/g;
-        const date = new Date(this.inputData.value.replace(regex, ','));
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const valor = parseFloat(this.inputValor.value);
-        return new Negociacao(date, quantidade, valor);
     }
     limparFormulario() {
         this.inputData.value = "";
