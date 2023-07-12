@@ -26,8 +26,6 @@ export class NegociacaoController {
     }
     seForDiaUtil(data) {
         return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
-        // Get day verifica o dia da semana, de 0 a 6 
-        // 0 é domingo, 6 é sabado
     }
     limparFormulario() {
         this.inputData.value = "";
