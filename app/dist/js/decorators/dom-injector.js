@@ -4,8 +4,6 @@ export function domInjector(seletor) {
             const elemento = document.querySelector(seletor);
             return elemento;
         };
-        Object.defineProperty(target, propertyKey, {
-            get: getter
-        });
+        Object.defineProperty(target, propertyKey, { get: getter });
     };
 }
