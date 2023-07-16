@@ -1,4 +1,13 @@
 export class Negociacao {
+
+    public paraTexto(): any {
+        return `
+            Data: ${this.data},
+            Quantidade: ${this.quantidade},
+            Valor: ${this.valor}
+        `;
+    }
+
     constructor(
         private _data: Date, 
         public readonly quantidade: number, 

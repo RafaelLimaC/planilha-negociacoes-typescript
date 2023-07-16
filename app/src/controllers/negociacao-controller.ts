@@ -2,9 +2,10 @@ import { domInjector } from '../decorators/dom-injector.js';
 import { inspect } from '../decorators/inspect.js';
 import { logarTempoDeExecucao } from '../decorators/logar-tempo-de-execucao.js';
 import { DiasDaSemana } from '../enums/dias-da-semana.js';
-import { NegociacoesDoDia } from '../interfaces/negociacao-do-dia.js';
 import { Negociacao } from '../models/negociacao.js';
 import { Negociacoes } from '../models/negociacoes.js';
+import { NegociacoesService } from '../services/negociacoes-service.js';
+import { imprimir } from '../utils/imprimir.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
 
@@ -18,6 +19,7 @@ export class NegociacaoController {
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
     private mensagemView = new MensagemView('#mensagemView');
+    private negociacoesService = new NegociacoesService();
 
     constructor() {
         this.negociacoesView.update(this.negociacoes);
@@ -40,28 +42,21 @@ export class NegociacaoController {
         }
 
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes);
         this.limparFormulario();
         this.atualizaView();
     }
 
     public importaDados(): void {
-        fetch('http://localhost:8080/dados')
-        .then(res =>  res.json())
-        .then((dados: Array<NegociacoesDoDia>) => {
-            return dados.map(dado => {
-                return new Negociacao(
-                    new Date(), 
-                    dado.vezes, 
-                    dado.montante)
-            })
-        })
-        .then(negociacoesDeHoje => {
-            for (let negociacao of negociacoesDeHoje) {
-                this.negociacoes.adiciona(negociacao);
-            }
+        this.negociacoesService
+            .obterNegociacoesDoDia()
+            .then(negociacoesDeHoje => {
+                for (let negociacao of negociacoesDeHoje) {
+                    this.negociacoes.adiciona(negociacao);
+                }
 
-            this.negociacoesView.update(this.negociacoes)
-        });
+                this.negociacoesView.update(this.negociacoes)
+            });
     };
 
     private ehDiaUtil(data: Date) {

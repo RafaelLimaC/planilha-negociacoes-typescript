@@ -4,6 +4,9 @@ export class Negociacao {
         this.quantidade = quantidade;
         this.valor = valor;
     }
+    paraTexto() {
+        throw new Error("Method not implemented.");
+    }
     get volume() {
         return this.quantidade * this.valor;
     }
